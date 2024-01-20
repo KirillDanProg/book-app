@@ -1,0 +1,30 @@
+{
+  "name": "book-app",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "build": "rollup -c -w",
+    "start": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/KirillDanProg/book-app.git"
+  },
+  "keywords": [
+    "books"
+  ],
+  "author": "Kirill Vychuzhanin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KirillDanProg/book-app/issues"
+  },
+  "homepage": "https://github.com/KirillDanProg/book-app",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "eslint": "^8.56.0",
+    "rollup": "^4.9.5",
+    "rollup-plugin-import-css": "^3.4.0"
+  }
+}
