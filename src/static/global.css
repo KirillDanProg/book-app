@@ -1,0 +1,18 @@
+* {
+  text-decoration: none;
+  box-sizing: border-box;
+  border: none;
+  color: var(--black);
+}
+
+:root {
+  --black: #131313;
+  --white: #fcfcfc;
+  --gray: #efefef;
+}
+
+body {
+  width: 60%;
+  margin: 0 auto;
+  font-family: "Open Sans", sans-serif;
+}
