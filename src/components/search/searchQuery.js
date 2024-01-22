@@ -10,7 +10,10 @@ export class SearchQuery extends DivComponent {
     this.element.classList.add("search");
     this.element.innerHTML = `
       <div class="search__input_wrapper">
-         <input class="search__input"/>
+         <input 
+            class="search__input"
+            placeholder="Найти книгу или автора..."  
+          />
          <img
             src="src/static/search.svg"
             class="search_icon search__input_icon"

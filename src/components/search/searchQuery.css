@@ -15,6 +15,11 @@
   background-color: var(--gray);
   border-radius: 5px;
 }
+.search__input:focus {
+  outline: none;
+  border: 1px solid var(--black);
+}
+
 .search__button {
   align-self: center;
   width: 40px;
