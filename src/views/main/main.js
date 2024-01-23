@@ -1,8 +1,9 @@
+import onChange from "on-change";
 import { AbstractView } from "../../common/view.js";
 import { Header } from "../../components/header/header.js";
 import { SearchQuery } from "../../components/search/searchQuery.js";
-import onChange from "on-change";
 import { CardsList } from "../../components/cardsList/cardsList.js";
+import { ConditinalRenderComponent } from "../../components/conditionalRenderComponent/conditinalRenderComponent.js";
 
 export class MainView extends AbstractView {
   state = {
@@ -24,25 +25,24 @@ export class MainView extends AbstractView {
   }
 
   async stateHook(path) {
-    if (path === "isLoading") {
-      debugger;
-    }
-    if (path === "booksList") {
-      debugger;
-    }
     if (path === "searchQuery") {
-      this.state.isLoading = true;
       const books = await this.fetchBooks();
       if (!books) {
         console.log("error");
+        return;
       }
+      this.state.isLoading = false;
       this.state.booksList = books;
+    }
+    if (path === "booksList" || path === "isLoading") {
+      this.render();
     }
   }
 
   async fetchBooks() {
+    this.state.isLoading = true;
     const booksResponse = await fetch(
-      `https://openlibrary.org/search.json?q=${this.state.searchQuery}&offset=${this.state.offset}`
+      `https://openlibrary.org/search.json?q=${this.state.searchQuery}&offset=${this.state.offset}&page=1`
     );
     if (!booksResponse.ok) {
       this.state.isLoading = false;
@@ -54,12 +54,17 @@ export class MainView extends AbstractView {
   }
 
   render() {
+    console.log("render");
     const main = document.createElement("div");
     const header = new Header(this.appState).render();
     const searchQuery = new SearchQuery(this.state).render();
     const cardsList = new CardsList(this.state).render();
+    const conditionalRenderComponent = new ConditinalRenderComponent(
+      cardsList,
+      this.state.isLoading
+    ).render();
     main.append(searchQuery);
-    main.append(cardsList);
+    main.append(conditionalRenderComponent);
     this.app.innerHTML = "";
     this.app.prepend(header);
     this.app.append(main);
