@@ -42,7 +42,7 @@ export class MainView extends AbstractView {
   async fetchBooks() {
     this.state.isLoading = true;
     const booksResponse = await fetch(
-      `https://openlibrary.org/search.json?q=${this.state.searchQuery}&offset=${this.state.offset}&page=1`
+      `https://openlibrary.org/search.json?q=${this.state.searchQuery}&offset=${this.state.offset}&limit=10`
     );
     if (!booksResponse.ok) {
       this.state.isLoading = false;
@@ -54,11 +54,10 @@ export class MainView extends AbstractView {
   }
 
   render() {
-    console.log("render");
     const main = document.createElement("div");
     const header = new Header(this.appState).render();
     const searchQuery = new SearchQuery(this.state).render();
-    const cardsList = new CardsList(this.state).render();
+    const cardsList = new CardsList(this.appState, this.state).render();
     const conditionalRenderComponent = new ConditinalRenderComponent(
       cardsList,
       this.state.isLoading
