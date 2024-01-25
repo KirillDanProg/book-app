@@ -8,9 +8,7 @@ export class Card extends DivComponent {
   }
 
   render() {
-    const active = this.appState.favorites.find(
-      (book) => book.key === this.state.key
-    );
+    const active = this.appState.favorites.has(this.state.key);
     const bookCoverImgSrc = this.state.cover_i
       ? `https://covers.openlibrary.org/b/id/${this.state.cover_i}-M.jpg`
       : "src/static/default_book_cover.jpeg";

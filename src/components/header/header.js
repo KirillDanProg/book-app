@@ -21,7 +21,7 @@ export class Header extends DivComponent {
         <a class="menu__item">
           <img src="src/static/favorite.svg" alt="logo"/>
           Избранное
-          <span class="menu__item_amount">${this.appState.favorites.length}</span>
+          <span class="menu__item_amount">${this.appState.favorites.size}</span>
         </a>
       </nav>
     `;

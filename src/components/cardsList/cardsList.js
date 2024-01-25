@@ -10,10 +10,9 @@ export class CardsList extends DivComponent {
   }
 
   checkIfFavorites(bookKey) {
-    return this.appState.favorites.find(
-      (favoriteBook) => favoriteBook.key === bookKey
-    );
+    return this.appState.favorites.has(bookKey);
   }
+
   addBookToFavorites(event) {
     const button = event.target.closest(".card__button");
     if (button) {
@@ -24,14 +23,12 @@ export class CardsList extends DivComponent {
         this.removeBookFromFavorites(bookKey);
         return;
       }
-      this.appState.favorites.push(book);
+      this.appState.favorites.set(bookKey, book);
     }
   }
 
   removeBookFromFavorites(bookKey) {
-    this.appState.favorites = this.appState.favorites.filter((favoriteBook) => {
-      return favoriteBook.key !== bookKey;
-    });
+    this.appState.favorites.delete(bookKey);
   }
 
   render() {

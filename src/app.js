@@ -2,7 +2,7 @@ import { MainView } from "./views/main/main.js";
 class App {
   routes = [{ route: "", view: MainView }];
   appState = {
-    favorites: [],
+    favorites: new Map(),
   };
 
   constructor() {
