@@ -21,7 +21,9 @@ export class MainView extends AbstractView {
   }
 
   appStateHook(path) {
-    console.log(path);
+    if (path === "favorites") {
+      this.render();
+    }
   }
 
   async stateHook(path) {
@@ -55,7 +57,6 @@ export class MainView extends AbstractView {
 
   render() {
     const main = document.createElement("div");
-    const header = new Header(this.appState).render();
     const searchQuery = new SearchQuery(this.state).render();
     const cardsList = new CardsList(this.appState, this.state).render();
     const conditionalRenderComponent = new ConditinalRenderComponent(
@@ -65,7 +66,11 @@ export class MainView extends AbstractView {
     main.append(searchQuery);
     main.append(conditionalRenderComponent);
     this.app.innerHTML = "";
-    this.app.prepend(header);
+    this.renderHeader();
     this.app.append(main);
+  }
+  renderHeader() {
+    const header = new Header(this.appState).render();
+    this.app.prepend(header);
   }
 }
