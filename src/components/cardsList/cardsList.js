@@ -9,6 +9,31 @@ export class CardsList extends DivComponent {
     this.state = state;
   }
 
+  checkIfFavorites(bookKey) {
+    return this.appState.favorites.find(
+      (favoriteBook) => favoriteBook.key === bookKey
+    );
+  }
+  addBookToFavorites(event) {
+    const button = event.target.closest(".card__button");
+    if (button) {
+      const bookKey = button.getAttribute("data-id");
+      const book = this.state.booksList.find((book) => book.key === bookKey);
+      const isAlreadyFavorite = this.checkIfFavorites(bookKey);
+      if (isAlreadyFavorite) {
+        this.removeBookFromFavorites(bookKey);
+        return;
+      }
+      this.appState.favorites.push(book);
+    }
+  }
+
+  removeBookFromFavorites(bookKey) {
+    this.appState.favorites = this.appState.favorites.filter((favoriteBook) => {
+      return favoriteBook.key !== bookKey;
+    });
+  }
+
   render() {
     this.element.classList.add("cardsList");
     this.element.innerHTML = `
@@ -19,6 +44,7 @@ export class CardsList extends DivComponent {
     this.state.booksList.forEach((book) => {
       this.element.append(new Card(this.appState, book).render());
     });
+    this.element.addEventListener("click", this.addBookToFavorites.bind(this));
     return this.element;
   }
 }
