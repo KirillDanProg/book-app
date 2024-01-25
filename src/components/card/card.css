@@ -36,7 +36,7 @@
 }
 .card__tags,
 .card__author {
-  font-size: 1px;
+  font-size: 12px;
   font-weight: 300;
   color: var(--gray);
 }
@@ -45,8 +45,16 @@
 }
 
 .card__button {
-  width: 20%;
-  border-radius: 5px;
+  width: 40px;
+  padding: 3px;
+  border: 1px solid var(--white);
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
 }
 .card__button_icon {
+  margin-top: 4px;
+}
+.card_button_active {
+  background-color: var(--white);
 }

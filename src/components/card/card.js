@@ -8,20 +8,19 @@ export class Card extends DivComponent {
   }
 
   render() {
-    let subjectItems = "";
-    if (this.state.subject) {
-      for (let i = 0; i < 1; i++) {
-        subjectItems += ` ${this.state.subject[i]}`;
-      }
-    }
-
-    let tags = subjectItems || "Отсутствует";
+    const active = this.appState.favorites.find(
+      (book) => book.key === this.state.key
+    );
+    const bookCoverImgSrc = this.state.cover_i
+      ? `https://covers.openlibrary.org/b/id/${this.state.cover_i}-M.jpg`
+      : "src/static/default_book_cover.jpeg";
+    let tags = this.state.subject ? this.state.subject[0] : "Отсутствует";
     this.element.classList.add("card");
     this.element.innerHTML = `
     <div class="card__img_wrapper">
       <img
         loading="lazy"
-        src="https://covers.openlibrary.org/b/id/${this.state.cover_i}-M.jpg" 
+        src=${bookCoverImgSrc}
         class="card__img"
         alt="Обложка книги"
       />
@@ -38,14 +37,16 @@ export class Card extends DivComponent {
            ${this.state.author_name ? this.state.author_name[0] : "Отсутствует"}
         </div>
       </div>
-      <button class="card__button">
+      <button class="card__button ${active ? "card_button_active" : ""}">
         <img 
           class="card__button_icon"
-          src="src/static/favorites.svg"
+          src="src/static/${active ? "favorite" : "favorite-white"}.svg"
         />
       </button>
     </div>
     `;
+    const button = this.element.querySelector(".card__button");
+    button.setAttribute("data-id", this.state.key);
     return this.element;
   }
 }
