@@ -3,10 +3,10 @@ import { Card } from "../card/card";
 import "./cardsList.css";
 
 export class CardsList extends DivComponent {
-  constructor(appState, state) {
+  constructor(appState, booksList) {
     super();
     this.appState = appState;
-    this.state = state;
+    this.booksList = booksList;
   }
 
   checkIfFavorites(bookKey) {
@@ -17,7 +17,7 @@ export class CardsList extends DivComponent {
     const button = event.target.closest(".card__button");
     if (button) {
       const bookKey = button.getAttribute("data-id");
-      const book = this.state.booksList.find((book) => book.key === bookKey);
+      const book = this.booksList.find((book) => book.key === bookKey);
       const isAlreadyFavorite = this.checkIfFavorites(bookKey);
       if (isAlreadyFavorite) {
         this.removeBookFromFavorites(bookKey);
@@ -33,12 +33,7 @@ export class CardsList extends DivComponent {
 
   render() {
     this.element.classList.add("cardsList");
-    this.element.innerHTML = `
-      <h1 class="cardsList__title">
-        Найдено книг: ${this.state.booksList.length}
-      </h1>
-    `;
-    this.state.booksList.forEach((book) => {
+    this.booksList.forEach((book) => {
       this.element.append(new Card(this.appState, book).render());
     });
     this.element.addEventListener("click", this.addBookToFavorites.bind(this));
