@@ -29,7 +29,9 @@ export class Card extends DivComponent {
            ${tags}
         </div>
         <div class="card__title">
-           ${this.state.title}
+          <a href="#bookDetails${this.state.key}">
+            ${this.state.title}
+          </a>
         </div>
         <div class="card__author">
            ${this.state.author_name ? this.state.author_name[0] : "Отсутствует"}
