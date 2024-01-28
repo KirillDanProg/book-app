@@ -12,7 +12,9 @@ export class Card extends DivComponent {
     const bookCoverImgSrc = this.state.cover_i
       ? `https://covers.openlibrary.org/b/id/${this.state.cover_i}-M.jpg`
       : "src/static/default_book_cover.jpeg";
-    let tags = this.state.subject ? this.state.subject[0] : "Отсутствует";
+    let tags = this.state.subject_facet
+      ? this.state.subject_facet[0]
+      : "Отсутствует";
     this.element.classList.add("card");
     this.element.innerHTML = `
     <div class="card__img_wrapper">
@@ -28,8 +30,8 @@ export class Card extends DivComponent {
         <div class="card__tags">
            ${tags}
         </div>
-        <div class="card__title">
-          <a href="#bookDetails${this.state.key}">
+        <div class="card__title" >
+          <a id="card_link" href="#bookDetails${this.state.key}">
             ${this.state.title}
           </a>
         </div>
@@ -37,16 +39,18 @@ export class Card extends DivComponent {
            ${this.state.author_name ? this.state.author_name[0] : "Отсутствует"}
         </div>
       </div>
-      <button class="card__button ${active ? "card_button_active" : ""}">
+      <button id="card_btn" class="card__button ${
+        active ? "card_button_active" : ""
+      }">
         <img 
+          id="card_icon"
           class="card__button_icon"
           src="src/static/${active ? "favorite" : "favorite-white"}.svg"
         />
       </button>
     </div>
     `;
-    const button = this.element.querySelector(".card__button");
-    button.setAttribute("data-id", this.state.key);
+    this.element.setAttribute("data-id", this.state.key);
     return this.element;
   }
 }
