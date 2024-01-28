@@ -30,6 +30,16 @@
 }
 .card__details_info-pages {
 }
+.card__details_button {
+  background-color: var(--black);
+  border-radius: 4px;
+  color: var(--white);
+  margin-top: 12px;
+  padding: 10px 30px;
+  align-self: flex-start;
+  font-size: 18px;
+  cursor: pointer;
+}
 .card__details_description {
   width: 100%;
   line-height: 28px;
@@ -37,5 +47,17 @@
 .card__details_description {
 }
 .card__details_tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   width: 100%;
+}
+.card__details_tags strong {
+  width: 100%;
+}
+.card__details_tag {
+  display: inline-block;
+  padding: 4px 6px;
+  border: 1px solid black;
+  border-radius: 6px;
 }
