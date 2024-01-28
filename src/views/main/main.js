@@ -3,7 +3,8 @@ import { AbstractView } from "../../common/view.js";
 import { Header } from "../../components/header/header.js";
 import { SearchQuery } from "../../components/search/searchQuery.js";
 import { CardsList } from "../../components/cardsList/cardsList.js";
-import { ConditinalRenderComponent } from "../../components/conditionalRenderComponent/conditinalRenderComponent.js";
+import { Loader } from "../../components/loader/loader.js";
+import { Title } from "../../components/title/title.js";
 
 export class MainView extends AbstractView {
   state = {
@@ -56,18 +57,29 @@ export class MainView extends AbstractView {
   }
 
   render() {
-    const main = document.createElement("div");
+    const mainPage = document.createElement("div");
     const searchQuery = new SearchQuery(this.state).render();
-    const cardsList = new CardsList(this.appState, this.state).render();
-    const conditionalRenderComponent = new ConditinalRenderComponent(
-      cardsList,
-      this.state.isLoading
+    const title = new Title(
+      "Найдено книг",
+      this.state.booksList.length
     ).render();
-    main.append(searchQuery);
-    main.append(conditionalRenderComponent);
+    const cardsList = new CardsList(
+      this.appState,
+      this.state.booksList
+    ).render();
+
     this.app.innerHTML = "";
     this.renderHeader();
-    this.app.append(main);
+    mainPage.append(searchQuery);
+
+    if (this.state.isLoading) {
+      mainPage.append(new Loader().render());
+    } else {
+      mainPage.append(title);
+      mainPage.append(cardsList);
+    }
+
+    this.app.append(mainPage);
   }
   renderHeader() {
     const header = new Header(this.appState).render();

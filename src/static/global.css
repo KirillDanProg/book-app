@@ -3,6 +3,7 @@
   text-decoration: none;
   box-sizing: border-box;
   border: none;
+  color: inherit;
 }
 
 :root {
@@ -14,6 +15,7 @@
 body {
   width: 70%;
   margin: 0 auto;
+  padding-bottom: 40px;
   font-family: "Open Sans", sans-serif;
   color: var(--black);
 }

@@ -12,7 +12,6 @@ class App {
   };
 
   constructor() {
-    window.state = this.appState;
     window.addEventListener("hashchange", this.route.bind(this));
     this.route();
   }

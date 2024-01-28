@@ -21,14 +21,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-.card__details_info-author {
-}
-.card__details_info-category {
-}
-.card__details_info-publication {
-}
-.card__details_info-pages {
+  max-width: 50%;
 }
 .card__details_button {
   background-color: var(--black);
@@ -43,8 +36,6 @@
 .card__details_description {
   width: 100%;
   line-height: 28px;
-}
-.card__details_description {
 }
 .card__details_tags {
   display: flex;

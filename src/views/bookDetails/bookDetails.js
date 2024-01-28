@@ -58,7 +58,6 @@ export class BookDetailsView extends AbstractView {
     if (this.state.isLoading) {
       bookDetailsPage.append(new Loader().render());
     } else {
-      console.log(this.state.bookDetails);
       const title = new Title(this.state.bookDetails.title, null).render();
       const cardDetails = new CardDetails(
         this.appState,

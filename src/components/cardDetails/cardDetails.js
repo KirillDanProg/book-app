@@ -40,7 +40,7 @@ export class CardDetails extends DivComponent {
       : "src/static/default_book_cover.jpeg";
     const category = this.appState.currentBook.subject_facet[0];
     const description =
-      this.bookDetails.description.value || this.bookDetails.description;
+      this.bookDetails.description?.value || this.bookDetails.description;
     const publication = this.bookDetails.first_publish_date || "Не указано";
     const authorName = this.appState.currentBook.author_name[0];
     const pagesNumber = this.appState.currentBook.number_of_pages_median;
