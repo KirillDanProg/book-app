@@ -1122,15 +1122,15 @@
 	  render() {
 	    this.element.innerHTML = `
       <div class="header__logo_wrapper">
-        <img src="src/static/logo.svg" alt="logo" class="header__logo"/>
+        <img src="static/logo.svg" alt="logo" class="header__logo"/>
       </div>
       <nav class="menu">
         <a class="menu__item" href="">
-          <img src="src/static/search.svg" alt="logo"/>
+          <img src="static/search.svg" alt="logo"/>
           Поиск книг
         </a>
         <a class="menu__item" href="#favorites">
-          <img src="src/static/favorite.svg" alt="logo"/>
+          <img src="static/favorite.svg" alt="logo"/>
           Избранное
           <span class="menu__item_amount">${this.appState.favorites.size}</span>
         </a>
@@ -1210,7 +1210,7 @@
 	    const isBookFavorite = this.checkIfFavorites(bookKey);
 	    const bookCoverImgSrc = this.bookDetails.covers
 	      ? `https://covers.openlibrary.org/b/id/${this.bookDetails.covers[0]}-M.jpg`
-	      : "src/static/default_book_cover.jpeg";
+	      : "static/default_book_cover.jpeg";
 	    const category = this.appState.currentBook
 	      ? this.appState.currentBook.subject_facet[0]
 	      : "Не указано";
@@ -1335,7 +1335,7 @@
 	    const active = this.appState.favorites.has(this.state.key);
 	    const bookCoverImgSrc = this.state.cover_i
 	      ? `https://covers.openlibrary.org/b/id/${this.state.cover_i}-M.jpg`
-	      : "src/static/default_book_cover.jpeg";
+	      : "static/default_book_cover.jpeg";
 	    let tags = this.state.subject_facet
 	      ? this.state.subject_facet[0]
 	      : "Отсутствует";
@@ -1369,7 +1369,7 @@
         <img 
           id="card_icon"
           class="card__button_icon"
-          src="src/static/${active ? "favorite" : "favorite-white"}.svg"
+          src="static/${active ? "favorite" : "favorite-white"}.svg"
         />
       </button>
     </div>
@@ -1492,14 +1492,14 @@
             placeholder="Найти книгу или автора..."  
           />
          <img
-            src="src/static/search.svg"
+            src="static/search.svg"
             class="search_icon search__input_icon"
             alt="search"
          />
       </div>
       <button class="search__button">
         <img
-          src="src/static/search-white.svg"
+          src="static/search-white.svg"
           class="search_icon search__button_icon"
           alt="search"
           />
