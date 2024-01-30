@@ -73,11 +73,8 @@ export class MainView extends AbstractView {
     const searchQuery = new SearchQuery(this.state).render();
     const pagination = new Pagination(this.state).render();
     const title = new Title("Найдено книг", this.state.books.numFound).render();
-    const cardsList = new CardsList(
-      this.appState,
-      this.state.books.list
-    ).render();
-
+    const cardsList = new CardsList(this.appState, this.state.books.list);
+    this.cardsList = cardsList;
     this.app.innerHTML = "";
     this.renderHeader();
     mainPage.append(searchQuery);
@@ -86,14 +83,22 @@ export class MainView extends AbstractView {
       mainPage.append(new Loader().render());
     } else {
       mainPage.append(title);
-      mainPage.append(cardsList);
+      mainPage.append(cardsList.render());
       this.state.books.numFound && mainPage.append(pagination);
     }
 
     this.app.append(mainPage);
   }
+
   renderHeader() {
     const header = new Header(this.appState).render();
     this.app.prepend(header);
+  }
+
+  destroy() {
+    onChange.unsubscribe(this.appState);
+    onChange.unsubscribe(this.state);
+    this.cardsList.destroy();
+    this.app.innerHTML = "";
   }
 }

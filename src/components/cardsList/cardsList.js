@@ -52,4 +52,9 @@ export class CardsList extends DivComponent {
     this.element.addEventListener("click", this.saveBookInfoToState.bind(this));
     return this.element;
   }
+
+  destroy() {
+    this.element.removeEventListener(this.saveBookInfoToState);
+    this.element.removeEventListener(this.addBookToFavorites);
+  }
 }

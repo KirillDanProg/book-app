@@ -22,6 +22,7 @@ class App {
       return route.path === mainHashURI;
     }).view;
     if (this.currentView) {
+      view.destroy();
       this.currentView.app.innerHTML = "";
     }
     this.currentView = new view(this.appState);
