@@ -5,19 +5,25 @@ import { SearchQuery } from "../../components/search/searchQuery.js";
 import { CardsList } from "../../components/cardsList/cardsList.js";
 import { Loader } from "../../components/loader/loader.js";
 import { Title } from "../../components/title/title.js";
+import { Pagination } from "../../components/pagination/pagination.js";
 
 export class MainView extends AbstractView {
   state = {
     searchQuery: "",
-    booksList: [],
+    books: {
+      list: [],
+      numFound: 0,
+    },
     isLoading: false,
     offset: 0,
+    limit: 8,
   };
   constructor(appState) {
     super();
     this.appState = appState;
     this.appState = onChange(this.appState, this.appStateHook.bind(this));
     this.state = onChange(this.state, this.stateHook.bind(this));
+    window.state = this.state;
     this.setTitle("Поиск книг");
   }
 
@@ -28,24 +34,30 @@ export class MainView extends AbstractView {
   }
 
   async stateHook(path) {
-    if (path === "searchQuery") {
+    if (path === "searchQuery" || path === "offset") {
       const books = await this.fetchBooks();
       if (!books) {
         console.log("error");
         return;
       }
       this.state.isLoading = false;
-      this.state.booksList = books;
+      this.state.books.list = books.list;
+      this.state.books.numFound = books.numFound;
     }
-    if (path === "booksList" || path === "isLoading") {
+    if (
+      path === "books.list" ||
+      path === "isLoading" ||
+      path === "books.numFound"
+    ) {
       this.render();
     }
   }
 
   async fetchBooks() {
     this.state.isLoading = true;
+    const { offset, limit, searchQuery } = this.state;
     const booksResponse = await fetch(
-      `https://openlibrary.org/search.json?q=${this.state.searchQuery}&offset=${this.state.offset}&limit=10`
+      `https://openlibrary.org/search.json?q=${searchQuery}&offset=${offset}&limit=${limit}`
     );
     if (!booksResponse.ok) {
       this.state.isLoading = false;
@@ -53,19 +65,17 @@ export class MainView extends AbstractView {
       return;
     }
     const books = await booksResponse.json();
-    return books.docs;
+    return { list: books.docs, numFound: books.numFound };
   }
 
   render() {
     const mainPage = document.createElement("div");
     const searchQuery = new SearchQuery(this.state).render();
-    const title = new Title(
-      "Найдено книг",
-      this.state.booksList.length
-    ).render();
+    const pagination = new Pagination(this.state).render();
+    const title = new Title("Найдено книг", this.state.books.numFound).render();
     const cardsList = new CardsList(
       this.appState,
-      this.state.booksList
+      this.state.books.list
     ).render();
 
     this.app.innerHTML = "";
@@ -77,6 +87,7 @@ export class MainView extends AbstractView {
     } else {
       mainPage.append(title);
       mainPage.append(cardsList);
+      this.state.books.numFound && mainPage.append(pagination);
     }
 
     this.app.append(mainPage);
