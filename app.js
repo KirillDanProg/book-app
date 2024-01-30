@@ -1322,6 +1322,10 @@
 	      bookDetailsPage.append(cardDetails);
 	    }
 	  }
+	  destroy() {
+	    onChange.unsubscribe(this.appState);
+	    onChange.unsubscribe(this.state);
+	  }
 	}
 
 	class Card extends DivComponent {
@@ -1431,8 +1435,8 @@
 	  }
 
 	  destroy() {
-	    this.element.removeEventListener(this.saveBookInfoToState);
-	    this.element.removeEventListener(this.addBookToFavorites);
+	    this.element.removeEventListener("click", this.saveBookInfoToState);
+	    this.element.removeEventListener("click", this.addBookToFavorites);
 	  }
 	}
 
@@ -1468,6 +1472,9 @@
 	    favoritesPage.append(title);
 	    favoritesPage.append(favoritesCardsList);
 	    this.app.append(favoritesPage);
+	  }
+	  destroy() {
+	    onChange.unsubscribe(this.appState);
 	  }
 	}
 
@@ -1667,7 +1674,6 @@
 	    onChange.unsubscribe(this.appState);
 	    onChange.unsubscribe(this.state);
 	    this.cardsList.destroy();
-	    this.app.innerHTML = "";
 	  }
 	}
 
@@ -1692,9 +1698,7 @@
 	      return route.path === mainHashURI;
 	    }).view;
 	    if (this.currentView) {
-	      console.log(view);
-	      view.destroy();
-	      this.currentView.app.innerHTML = "";
+	      this.currentView.destroy();
 	    }
 	    this.currentView = new view(this.appState);
 	    this.currentView.render();
