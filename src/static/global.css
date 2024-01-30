@@ -12,10 +12,17 @@
   --gray: #dedede;
 }
 
+button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
 body {
   width: 70%;
   margin: 0 auto;
   padding-bottom: 40px;
   font-family: "Open Sans", sans-serif;
   color: var(--black);
+  min-height: 100vh;
 }
