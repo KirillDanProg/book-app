@@ -1692,6 +1692,7 @@
 	      return route.path === mainHashURI;
 	    }).view;
 	    if (this.currentView) {
+	      console.log(view);
 	      view.destroy();
 	      this.currentView.app.innerHTML = "";
 	    }
