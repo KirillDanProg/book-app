@@ -6,7 +6,9 @@
   "main": "app.js",
   "scripts": {
     "build": "rollup -c -w",
-    "start": "live-server"
+    "start": "live-server",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/KirillDanProg/book-app/issues"
   },
-  "homepage": "https://github.com/KirillDanProg/book-app",
+  "homepage": "https://KirillDanProg.github.io/book-app",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
     "eslint": "^8.56.0",
