@@ -67,4 +67,8 @@ export class BookDetailsView extends AbstractView {
       bookDetailsPage.append(cardDetails);
     }
   }
+  destroy() {
+    onChange.unsubscribe(this.appState);
+    onChange.unsubscribe(this.state);
+  }
 }

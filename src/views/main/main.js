@@ -99,6 +99,5 @@ export class MainView extends AbstractView {
     onChange.unsubscribe(this.appState);
     onChange.unsubscribe(this.state);
     this.cardsList.destroy();
-    this.app.innerHTML = "";
   }
 }

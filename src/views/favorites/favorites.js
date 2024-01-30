@@ -37,4 +37,7 @@ export class FavoritesView extends AbstractView {
     favoritesPage.append(favoritesCardsList);
     this.app.append(favoritesPage);
   }
+  destroy() {
+    onChange.unsubscribe(this.appState);
+  }
 }

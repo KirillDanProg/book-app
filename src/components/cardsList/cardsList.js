@@ -54,7 +54,7 @@ export class CardsList extends DivComponent {
   }
 
   destroy() {
-    this.element.removeEventListener(this.saveBookInfoToState);
-    this.element.removeEventListener(this.addBookToFavorites);
+    this.element.removeEventListener("click", this.saveBookInfoToState);
+    this.element.removeEventListener("click", this.addBookToFavorites);
   }
 }
