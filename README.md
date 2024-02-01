@@ -27,5 +27,8 @@ This project is a book searching web application developed using JavaScript. It 
 - Use pagination to navigate through multiple pages of search results.
 - Mark books as favorites by clicking the 'Add to Favorites' button.
 
+## Live Demo
+Check out the [Live Demo](https://kirilldanprog.github.io/book-app/) to see the Book Searching Web App in action!
+
 ## Author
 [Kirill Vychuzhanin](https://github.com/KirillDanProg)
