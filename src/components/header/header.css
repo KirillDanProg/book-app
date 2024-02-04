@@ -4,6 +4,7 @@
   justify-content: space-between;
   margin: 16px 0 24px;
 }
+
 .header__logo_wrapper {
   display: flex;
   align-items: center;
@@ -13,6 +14,7 @@
 .header__logo {
   width: 32px;
 }
+
 .menu {
   display: flex;
   gap: 28px;
@@ -20,21 +22,23 @@
 
 .menu__item {
   display: flex;
-  align-items: center;
   gap: 6px;
+  align-items: center;
   font-size: 14px;
   cursor: pointer;
 }
+
 .menu__item_active {
   font-weight: 600;
 }
+
 .menu__item_amount {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 22px;
   height: 22px;
+  margin-left: 12px;
   border: 1px solid var(--black);
   border-radius: 50%;
-  margin-left: 12px;
 }

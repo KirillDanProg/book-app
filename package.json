@@ -5,8 +5,11 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "build": "rollup -c -w",
-    "start": "live-server"
+    "build": "rollup -c",
+    "start": "live-server",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "stylelint": "stylelint \"**/*.css\" --fix"
   },
   "repository": {
     "type": "git",
@@ -25,7 +28,12 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "eslint": "^8.56.0",
     "rollup": "^4.9.5",
-    "rollup-plugin-import-css": "^3.4.0"
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-import-css": "^3.4.0",
+    "stylelint": "^16.2.1",
+    "stylelint-config-recess-order": "^4.4.0",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-order": "^6.0.4"
   },
   "dependencies": {
     "on-change": "^5.0.1"
